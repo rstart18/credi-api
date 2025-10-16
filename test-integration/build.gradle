@@ -1,0 +1,5 @@
+dependencies {
+    testImplementation project(':app-service')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.2.2'
+    testImplementation 'com.h2database:h2:2.2.224'
+}

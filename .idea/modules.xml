@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-first/credi-api.api-first.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-first/credi-api.api-first.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app-service/credi-api.app-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app-service/credi-api.app-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/credi-api.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/credi-api.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/credi-api.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/credi-api.domain.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infrastructure/credi-api.infrastructure.main.iml" filepath="$PROJECT_DIR$/.idea/modules/infrastructure/credi-api.infrastructure.main.iml" />
+    </modules>
+  </component>
+</project>

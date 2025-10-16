@@ -1,0 +1,200 @@
+openapi: 3.0.3
+info:
+  title: CrediAPI - Sistema de Originación de Créditos
+  description: API para gestión de clientes, solicitudes y préstamos
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+
+paths:
+  /api/customers:
+    post:
+      summary: Crear cliente
+      operationId: createCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '201':
+          description: Cliente creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+
+  /api/customers/{id}:
+    get:
+      summary: Obtener cliente por ID
+      operationId: getCustomer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Cliente encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+
+  /api/applications:
+    post:
+      summary: Crear solicitud de crédito
+      operationId: createApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanApplicationRequest'
+      responses:
+        '201':
+          description: Solicitud creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanApplicationResponse'
+
+  /api/applications/{id}/approve:
+    post:
+      summary: Aprobar solicitud de crédito
+      operationId: approveApplication
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Solicitud aprobada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApproveApplicationResponse'
+
+components:
+  schemas:
+    CustomerRequest:
+      type: object
+      required:
+        - fullName
+        - documentId
+        - email
+        - phone
+      properties:
+        fullName:
+          type: string
+          minLength: 2
+          maxLength: 100
+        documentId:
+          type: string
+          pattern: '^[0-9]{8,12}$'
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          pattern: '^[0-9]{10}$'
+
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        fullName:
+          type: string
+        documentId:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    LoanApplicationRequest:
+      type: object
+      required:
+        - customerId
+        - productId
+        - amount
+        - termMonths
+      properties:
+        customerId:
+          type: integer
+          format: int64
+        productId:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: decimal
+          minimum: 1000
+        termMonths:
+          type: integer
+          minimum: 6
+          maximum: 60
+
+    LoanApplicationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customerId:
+          type: integer
+          format: int64
+        productId:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: decimal
+        termMonths:
+          type: integer
+        status:
+          type: string
+          enum: [DRAFT, SUBMITTED, APPROVED, REJECTED]
+        createdAt:
+          type: string
+          format: date-time
+
+    ApproveApplicationResponse:
+      type: object
+      properties:
+        applicationId:
+          type: integer
+          format: int64
+        loanId:
+          type: integer
+          format: int64
+        status:
+          type: string
+        approvedAt:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: string

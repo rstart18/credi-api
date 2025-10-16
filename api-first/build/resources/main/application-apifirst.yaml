@@ -1,0 +1,6 @@
+springdoc:
+  swagger-ui:
+    url: /crediapi-openapi.yaml
+openapi:
+  aPIDocumentation:
+    base-path: /crediapi

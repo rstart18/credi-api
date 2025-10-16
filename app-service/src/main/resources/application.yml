@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: credi-api
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.crediapi: DEBUG

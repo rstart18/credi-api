@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'credi-api'
+
+include 'app-service'
+include 'api-first'
+include 'application'
+include 'domain'
+include 'infrastructure'
+include 'test-integration'
